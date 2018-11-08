@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace PricingService.Bo.Domain
 {
-    public class Tariff
+    public class Tariff : BaseEntity
     {
         public string Code { get; set; }
 
-        public IList<TariffVersion> TariffVersions { get; set; }
+        public virtual IList<TariffVersion> TariffVersions { get; set; }
 
         public PolicyPrice CalculatePolicyPrice(PolicyPrice policyPrice)
         {

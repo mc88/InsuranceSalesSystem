@@ -2,7 +2,7 @@
 
 namespace PricingService.Bo.Domain
 {
-    public class PolicyHolder
+    public class PolicyHolder : BaseEntity
     {
         public string FirstName { get; set; }
 

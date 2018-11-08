@@ -1,6 +1,6 @@
 ﻿namespace PricingService.Bo.Domain
 {
-    public class CoverPrice
+    public class CoverPrice : BaseEntity
     {
         public string Code { get; set; }
 

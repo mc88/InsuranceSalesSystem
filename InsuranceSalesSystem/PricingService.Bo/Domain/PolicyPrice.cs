@@ -2,12 +2,12 @@
 
 namespace PricingService.Bo.Domain
 {
-    public class PolicyPrice
+    public class PolicyPrice : BaseEntity
     {
         public string ProductCode { get; set; }
 
-        public PolicyHolder PolicyHolder { get; set; }
+        public virtual PolicyHolder PolicyHolder { get; set; }
 
-        public IList<string> SelectedCovers { get; set; }
+        public virtual IList<CoverPrice> SelectedCovers { get; set; }
     }
 }
