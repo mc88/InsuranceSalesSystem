@@ -8,7 +8,9 @@ namespace PricingService.Bo.Domain
         public DateTime CoverFrom { get; set; }
 
         public DateTime CoverTo { get; set; }
-        
+
+        public int TariffId { get; set; }
+
         public virtual IList<CoverPrice> CoverPrices { get; set; }
     }
 }

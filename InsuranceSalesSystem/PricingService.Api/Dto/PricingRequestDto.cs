@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace PricingService.Api.Dto
 {
     public class PricingRequestDto
     {
         public string ProductCode { get; set; }
+
+        public DateTime PolicyStartDate { get; set; }
 
         public PersonDto PolicyHolder { get; set; }
 

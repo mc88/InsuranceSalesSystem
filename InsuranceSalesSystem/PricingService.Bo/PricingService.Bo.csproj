@@ -6,8 +6,6 @@
 
   <ItemGroup>
     <Folder Include="Assemblers\" />
-    <Folder Include="Infrastructure\Database\Migrations\" />
-    <Folder Include="Utils\" />
     <Folder Include="Repository\" />
     <Folder Include="Services\" />
   </ItemGroup>
