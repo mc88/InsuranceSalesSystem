@@ -1,8 +1,9 @@
 ﻿using MediatR;
+using PricingService.Api.Dto;
 using System;
 using System.Collections.Generic;
 
-namespace PricingService.Api.Dto.Queries
+namespace PricingService.Bo.Queries
 {
     public class PricingRequestQuery : IRequest<PricingResponseDto>
     {

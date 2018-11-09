@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using PricingService.Api.Dto.Queries;
 using PricingService.Bo.Infrastructure.Database;
+using PricingService.Bo.Queries;
 
 namespace PricingService.Web
 {

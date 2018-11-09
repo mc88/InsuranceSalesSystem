@@ -7,8 +7,9 @@ using System.Linq;
 using PricingService.Api.Exceptions;
 using PricingService.Bo.Utils;
 using Microsoft.EntityFrameworkCore;
+using PricingService.Api.Dto;
 
-namespace PricingService.Api.Dto.Queries.Handlers
+namespace PricingService.Bo.Queries.Handlers
 {
     public class PricingRequestHandler : IRequestHandler<PricingRequestQuery, PricingResponseDto>
     {

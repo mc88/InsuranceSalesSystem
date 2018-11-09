@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PricingService.Api.Dto;
-using PricingService.Api.Dto.Queries;
+using PricingService.Bo.Queries;
 using System.Threading.Tasks;
 
 namespace PricingService.Web.Controllers
