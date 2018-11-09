@@ -11,14 +11,70 @@ namespace PricingService.Bo.Infrastructure.Database
         public virtual DbSet<Tariff> Tariff { get; set; }
         public virtual DbSet<TariffVersion> TariffVersion { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(@"Server=MCHROBAK-NB1\MSSQLSERVER2012;Database=ISS;Trusted_Connection=True;");
-        }
+        public PricingDbContext(DbContextOptions<PricingDbContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<PolicyHolder>(entity =>
+            {
+                entity.HasKey(x => x.Id);
+
+                entity.Property(x => x.FirstName)
+                    .HasMaxLength(100)
+                    .IsRequired();
+
+                entity.Property(x => x.LastName)
+                    .HasMaxLength(100)
+                    .IsRequired();
+
+                entity.Property(x => x.Pesel)
+                    .HasMaxLength(11)
+                    .IsRequired();
+
+                entity.HasData(SeedData.PolicyHolders());
+            });
+
+            modelBuilder.Entity<PolicyPrice>(entity =>
+            {
+                entity.HasKey(x => x.Id);
+
+                entity.Property(x => x.ProductCode)
+                    .HasMaxLength(25)
+                    .IsRequired();
+
+                entity.HasOne(x => x.PolicyHolder);
+
+                entity.HasData(SeedData.PolicyPrices());
+            });
+
+            modelBuilder.Entity<Tariff>(entity =>
+            {
+                entity.HasKey(x => x.Id);
+
+                entity.Property(x => x.Code)
+                    .HasMaxLength(25)
+                    .IsRequired();
+
+                entity.HasMany(x => x.TariffVersions).WithOne();
+
+                entity.HasData(SeedData.Tariffs());
+            });
+
+            modelBuilder.Entity<TariffVersion>(entity =>
+            {
+                entity.HasKey(x => x.Id);
+
+                entity.Property(x => x.CoverFrom)
+                    .IsRequired();
+
+                entity.Property(x => x.CoverTo);
+
+                entity.HasMany(x => x.CoverPrices);
+
+                entity.HasData(SeedData.TariffVersions());
+            });
 
             modelBuilder.Entity<CoverPrice>(entity =>
             {
@@ -36,59 +92,8 @@ namespace PricingService.Bo.Infrastructure.Database
 
                 entity.Property(x => x.Price)
                     .IsRequired();
-            });
 
-            modelBuilder.Entity<PolicyHolder>(entity =>
-            {
-                entity.HasKey(x => x.Id);
-
-                entity.Property(x => x.FirstName)
-                    .HasMaxLength(100)
-                    .IsRequired();
-
-                entity.Property(x => x.LastName)
-                    .HasMaxLength(100)
-                    .IsRequired();
-
-                entity.Property(x => x.Pesel)
-                    .HasMaxLength(11)
-                    .IsRequired();
-            });
-
-            modelBuilder.Entity<PolicyPrice>(entity =>
-            {
-                entity.HasKey(x => x.Id);
-
-                entity.Property(x => x.ProductCode)
-                    .HasMaxLength(25)
-                    .IsRequired();
-
-                //entity.HasOne(x => x.PolicyHolder);
-
-                //entity.HasMany(x => x.SelectedCovers);
-            });
-
-            modelBuilder.Entity<Tariff>(entity =>
-            {
-                entity.HasKey(x => x.Id);
-
-                entity.Property(x => x.Code)
-                    .HasMaxLength(25)
-                    .IsRequired();
-
-                //entity.HasMany(x => x.TariffVersions);
-            });
-
-            modelBuilder.Entity<TariffVersion>(entity =>
-            {
-                entity.HasKey(x => x.Id);
-
-                entity.Property(x => x.CoverFrom)
-                    .IsRequired();
-
-                entity.Property(x => x.CoverTo);
-
-                //entity.HasMany(x => x.CoverPrices);
+                entity.HasData(SeedData.CoverPrices());
             });
         }
     }
