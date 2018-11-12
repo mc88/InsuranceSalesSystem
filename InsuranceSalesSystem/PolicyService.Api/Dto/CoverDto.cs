@@ -2,9 +2,9 @@
 
 namespace PolicyService.Api.Dto
 {
-    public class CovertDto
+    public class CoverDto
     {
-        public string CovertCode { get; set; }
+        public string CoverCode { get; set; }
 
         public DateTime CoverFrom { get; set; }
 

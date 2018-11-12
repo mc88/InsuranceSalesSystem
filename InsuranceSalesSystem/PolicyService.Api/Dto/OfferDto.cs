@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PolicyService.Api.Enums;
+using System;
 using System.Collections.Generic;
 
 namespace PolicyService.Api.Dto
