@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PricingService.Api.Dto;
-using PricingService.Bo.Queries;
 using System.Threading.Tasks;
 
 namespace PricingService.Web.Controllers
@@ -17,20 +16,10 @@ namespace PricingService.Web.Controllers
             this.mediator = mediator;
         }
 
-        //TODO: change to get
         [HttpPost]
-        public async Task<PricingResponseDto> GetPrice([FromBody] PricingRequestDto request)
+        public async Task<CalculatePriceResponseDto> CalculatePrice([FromBody] CalculatePriceRequestDto request)
         {
-            //TODO: add mappers
-            var query = new PricingRequestQuery()
-            {
-               Pesel = request.PolicyHolder.Pesel,
-               ProductCode = request.ProductCode,
-               SelectedCovers = request.SelectedCovers,
-               PolicyStartDate = request.PolicyStartDate
-            };
-
-            PricingResponseDto response = await mediator.Send(query);
+            CalculatePriceResponseDto response = await mediator.Send(request);
 
             return response;
         }

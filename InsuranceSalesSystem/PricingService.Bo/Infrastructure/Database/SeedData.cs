@@ -5,22 +5,6 @@ namespace PricingService.Bo.Infrastructure.Database
 {
     public static class SeedData
     {
-        public static PolicyHolder[] PolicyHolders()
-        {
-            return new PolicyHolder[]
-            {
-                new PolicyHolder() { Id = 1, FirstName = "Clark", LastName = "Kent", Pesel = "80010112345" }
-            };
-        }
-
-        public static PolicyPrice[] PolicyPrices()
-        {
-            return new PolicyPrice[]
-            {
-                new PolicyPrice() { Id = 1, ProductCode = "GOLDEN_HEALTH", PolicyHolderId = 1}
-            };
-        }
-
         public static Tariff[] Tariffs()
         {
             return new Tariff[]

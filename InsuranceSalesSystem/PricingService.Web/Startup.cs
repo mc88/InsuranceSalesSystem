@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using PricingService.Bo.Handlers;
 using PricingService.Bo.Infrastructure.Database;
-using PricingService.Bo.Queries;
 
 namespace PricingService.Web
 {
@@ -22,7 +22,7 @@ namespace PricingService.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddMediatR(typeof(PricingRequestQuery).Assembly);
+            services.AddMediatR(typeof(CalculatePriceHandler).Assembly);
             services.AddDbContext<PricingDbContext>(options =>
              options.UseSqlServer(Configuration.GetConnectionString("PricingDb")));
         }

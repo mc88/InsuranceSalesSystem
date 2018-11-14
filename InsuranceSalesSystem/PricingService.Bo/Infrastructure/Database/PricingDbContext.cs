@@ -6,8 +6,6 @@ namespace PricingService.Bo.Infrastructure.Database
     public class PricingDbContext : DbContext
     {
         public virtual DbSet<CoverPrice> CoverPrice { get; set; }
-        public virtual DbSet<PolicyHolder> PolicyHolder { get; set; }
-        public virtual DbSet<PolicyPrice> PolicyPrice { get; set; }
         public virtual DbSet<Tariff> Tariff { get; set; }
         public virtual DbSet<TariffVersion> TariffVersion { get; set; }
 
@@ -16,38 +14,6 @@ namespace PricingService.Bo.Infrastructure.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<PolicyHolder>(entity =>
-            {
-                entity.HasKey(x => x.Id);
-
-                entity.Property(x => x.FirstName)
-                    .HasMaxLength(100)
-                    .IsRequired();
-
-                entity.Property(x => x.LastName)
-                    .HasMaxLength(100)
-                    .IsRequired();
-
-                entity.Property(x => x.Pesel)
-                    .HasMaxLength(11)
-                    .IsRequired();
-
-                entity.HasData(SeedData.PolicyHolders());
-            });
-
-            modelBuilder.Entity<PolicyPrice>(entity =>
-            {
-                entity.HasKey(x => x.Id);
-
-                entity.Property(x => x.ProductCode)
-                    .HasMaxLength(25)
-                    .IsRequired();
-
-                entity.HasOne(x => x.PolicyHolder);
-
-                entity.HasData(SeedData.PolicyPrices());
-            });
 
             modelBuilder.Entity<Tariff>(entity =>
             {
@@ -91,6 +57,7 @@ namespace PricingService.Bo.Infrastructure.Database
                     .IsRequired();
 
                 entity.Property(x => x.Price)
+                    .HasColumnType("decimal(19,4)")
                     .IsRequired();
 
                 entity.HasData(SeedData.CoverPrices());

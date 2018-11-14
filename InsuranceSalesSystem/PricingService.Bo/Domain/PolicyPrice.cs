@@ -1,11 +1,20 @@
-﻿namespace PricingService.Bo.Domain
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace PricingService.Bo.Domain
 {
-    public class PolicyPrice : BaseEntity
+    public class PolicyPrice
     {
+        public PolicyPrice(string productCode, IList<CoverPrice> selectedCoverPrices)
+        {
+            ProductCode = productCode;
+            SelectedCoverPrices = selectedCoverPrices;
+        }
+
         public string ProductCode { get; set; }
 
-        public int PolicyHolderId { get; set; }
+        public IList<CoverPrice> SelectedCoverPrices { get; set; }
 
-        public virtual PolicyHolder PolicyHolder { get; set; }
+        public decimal TotalPrice => SelectedCoverPrices.Sum(x => x.Price);
     }
 }

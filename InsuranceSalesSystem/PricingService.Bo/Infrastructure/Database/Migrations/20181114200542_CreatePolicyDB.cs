@@ -4,25 +4,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PricingService.Bo.Infrastructure.Database.Migrations
 {
-    public partial class CreatePricingDB : Migration
+    public partial class CreatePolicyDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "PolicyHolder",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    FirstName = table.Column<string>(maxLength: 100, nullable: false),
-                    LastName = table.Column<string>(maxLength: 100, nullable: false),
-                    Pesel = table.Column<string>(maxLength: 11, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PolicyHolder", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Tariff",
                 columns: table => new
@@ -34,26 +19,6 @@ namespace PricingService.Bo.Infrastructure.Database.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tariff", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PolicyPrice",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ProductCode = table.Column<string>(maxLength: 25, nullable: false),
-                    PolicyHolderId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PolicyPrice", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_PolicyPrice_PolicyHolder_PolicyHolderId",
-                        column: x => x.PolicyHolderId,
-                        principalTable: "PolicyHolder",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -86,7 +51,7 @@ namespace PricingService.Bo.Infrastructure.Database.Migrations
                     Code = table.Column<string>(maxLength: 25, nullable: false),
                     AgeFrom = table.Column<int>(nullable: false),
                     AgeTo = table.Column<int>(nullable: false),
-                    Price = table.Column<decimal>(nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(19,4)", nullable: false),
                     TariffVersionId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -101,19 +66,9 @@ namespace PricingService.Bo.Infrastructure.Database.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "PolicyHolder",
-                columns: new[] { "Id", "FirstName", "LastName", "Pesel" },
-                values: new object[] { 1, "Clark", "Kent", "80010112345" });
-
-            migrationBuilder.InsertData(
                 table: "Tariff",
                 columns: new[] { "Id", "Code" },
                 values: new object[] { 1, "GOLDEN_HEALTH" });
-
-            migrationBuilder.InsertData(
-                table: "PolicyPrice",
-                columns: new[] { "Id", "PolicyHolderId", "ProductCode" },
-                values: new object[] { 1, 1, "GOLDEN_HEALTH" });
 
             migrationBuilder.InsertData(
                 table: "TariffVersion",
@@ -152,11 +107,6 @@ namespace PricingService.Bo.Infrastructure.Database.Migrations
                 column: "TariffVersionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PolicyPrice_PolicyHolderId",
-                table: "PolicyPrice",
-                column: "PolicyHolderId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_TariffVersion_TariffId",
                 table: "TariffVersion",
                 column: "TariffId");
@@ -168,13 +118,7 @@ namespace PricingService.Bo.Infrastructure.Database.Migrations
                 name: "CoverPrice");
 
             migrationBuilder.DropTable(
-                name: "PolicyPrice");
-
-            migrationBuilder.DropTable(
                 name: "TariffVersion");
-
-            migrationBuilder.DropTable(
-                name: "PolicyHolder");
 
             migrationBuilder.DropTable(
                 name: "Tariff");

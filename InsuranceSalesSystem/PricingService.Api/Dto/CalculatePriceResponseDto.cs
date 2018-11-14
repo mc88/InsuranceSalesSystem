@@ -2,7 +2,7 @@
 
 namespace PricingService.Api.Dto
 {
-    public class PricingResponseDto
+    public class CalculatePriceResponseDto
     {
         public string ProductCode { get; set; }
 

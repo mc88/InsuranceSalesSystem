@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PricingService.Bo.Domain
 {
@@ -12,5 +13,10 @@ namespace PricingService.Bo.Domain
         public int TariffId { get; set; }
 
         public virtual IList<CoverPrice> CoverPrices { get; set; }
+
+        public CoverPrice GetCoverPrice(string coverCode, int age)
+        {
+            return CoverPrices.FirstOrDefault(x => x.Code == coverCode && x.AgeFrom <= age && x.AgeTo >= age);
+        }
     }
 }

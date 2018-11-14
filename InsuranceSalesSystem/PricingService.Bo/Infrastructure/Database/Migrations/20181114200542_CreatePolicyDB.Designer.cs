@@ -10,8 +10,8 @@ using PricingService.Bo.Infrastructure.Database;
 namespace PricingService.Bo.Infrastructure.Database.Migrations
 {
     [DbContext(typeof(PricingDbContext))]
-    [Migration("20181109102528_CreatePricingDB")]
-    partial class CreatePricingDB
+    [Migration("20181114200542_CreatePolicyDB")]
+    partial class CreatePolicyDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,7 +35,8 @@ namespace PricingService.Bo.Infrastructure.Database.Migrations
                         .IsRequired()
                         .HasMaxLength(25);
 
-                    b.Property<decimal>("Price");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(19,4)");
 
                     b.Property<int>("TariffVersionId");
 
@@ -60,56 +61,6 @@ namespace PricingService.Bo.Infrastructure.Database.Migrations
                         new { Id = 12, AgeFrom = 46, AgeTo = 65, Code = "COVER2", Price = 310m, TariffVersionId = 2 },
                         new { Id = 13, AgeFrom = 18, AgeTo = 65, Code = "COVER3", Price = 145m, TariffVersionId = 2 },
                         new { Id = 14, AgeFrom = 66, AgeTo = 999, Code = "COVER3", Price = 310m, TariffVersionId = 2 }
-                    );
-                });
-
-            modelBuilder.Entity("PricingService.Bo.Domain.PolicyHolder", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(100);
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(100);
-
-                    b.Property<string>("Pesel")
-                        .IsRequired()
-                        .HasMaxLength(11);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PolicyHolder");
-
-                    b.HasData(
-                        new { Id = 1, FirstName = "Clark", LastName = "Kent", Pesel = "80010112345" }
-                    );
-                });
-
-            modelBuilder.Entity("PricingService.Bo.Domain.PolicyPrice", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("PolicyHolderId");
-
-                    b.Property<string>("ProductCode")
-                        .IsRequired()
-                        .HasMaxLength(25);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PolicyHolderId");
-
-                    b.ToTable("PolicyPrice");
-
-                    b.HasData(
-                        new { Id = 1, PolicyHolderId = 1, ProductCode = "GOLDEN_HEALTH" }
                     );
                 });
 
@@ -161,14 +112,6 @@ namespace PricingService.Bo.Infrastructure.Database.Migrations
                     b.HasOne("PricingService.Bo.Domain.TariffVersion")
                         .WithMany("CoverPrices")
                         .HasForeignKey("TariffVersionId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("PricingService.Bo.Domain.PolicyPrice", b =>
-                {
-                    b.HasOne("PricingService.Bo.Domain.PolicyHolder", "PolicyHolder")
-                        .WithMany()
-                        .HasForeignKey("PolicyHolderId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
