@@ -64,7 +64,7 @@ namespace PolicyService.Bo.Infrastructure.Database
             {
                 entity.HasKey(x => x.Id);
 
-                entity.Property(x => x.PoicyNumber)
+                entity.Property(x => x.PolicyNumber)
                     .HasMaxLength(25)
                     .IsRequired();
 

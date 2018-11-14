@@ -21,7 +21,7 @@ namespace PolicyService.Api.Dto
 
         public PolicyStatus PolicyStatus { get; set; }
 
-        public PersonDto PolicyFolder { get; set; }
+        public PersonDto PolicyHolder { get; set; }
 
         public decimal TotalPremium { get; set; }
     }

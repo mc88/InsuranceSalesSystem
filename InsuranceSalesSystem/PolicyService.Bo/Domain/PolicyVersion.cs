@@ -1,12 +1,31 @@
 ﻿using PolicyService.Api.Enums;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace PolicyService.Bo.Domain
 {
     public class PolicyVersion : BaseEntity
     {
-        public string PoicyNumber { get; set; }
+        public PolicyVersion() { }
+
+        public PolicyVersion(Offer offer)
+        {
+            PolicyNumber = offer.OfferNumber;
+            VersionNumber = GetVersionNumber(1);
+            PolicyFrom = offer.PolicyFrom;
+            PolicyTo = offer.PolicyTo;
+            //TODO
+            //VersionFrom = ??
+            //VersionTo = ??
+            ProductCode = offer.ProductCode;
+            PolicyStatus = PolicyStatus.Active;
+            PolicyHolder = offer.PolicyHolder;
+            TotalPremium = offer.TotalPrice;
+            Covers = offer.Covers.Select(x => new PolicyCover(x)).ToList();
+        }
+
+        public string PolicyNumber { get; set; }
 
         public string VersionNumber { get; set; }
 
@@ -29,5 +48,10 @@ namespace PolicyService.Bo.Domain
         public Policy Policy { get; set; }
 
         public IList<PolicyCover> Covers { get; set; }
+
+        private string GetVersionNumber(int number)
+        {
+            return $"VERSION_{number}";
+        }
     }
 }

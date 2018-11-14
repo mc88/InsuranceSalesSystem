@@ -1,8 +1,10 @@
-﻿using System;
+﻿using MediatR;
+using PolicyService.Api.Dto.Responses;
+using System;
 
-namespace PolicyService.Api.Dto
+namespace PolicyService.Api.Dto.Requests
 {
-    public class FindOfferRequestDto
+    public class FindOfferRequestDto : IRequest<FindOfferResponseDto>
     {
         public string NumberLike { get; set; }
 

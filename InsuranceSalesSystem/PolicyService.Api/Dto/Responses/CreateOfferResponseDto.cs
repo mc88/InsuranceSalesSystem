@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PolicyService.Api.Dto
+namespace PolicyService.Api.Dto.Responses
 {
     public class CreateOfferResponseDto
     {

@@ -1,9 +1,11 @@
-﻿using System;
+﻿using MediatR;
+using PolicyService.Api.Dto.Responses;
+using System;
 using System.Collections.Generic;
 
-namespace PolicyService.Api.Dto
+namespace PolicyService.Api.Dto.Requests
 {
-    public class CreateOfferRequestDto
+    public class CreateOfferRequestDto : IRequest<CreateOfferResponseDto>
     {
         public string ProductCode { get; set; }
 
