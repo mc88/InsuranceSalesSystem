@@ -153,7 +153,7 @@ namespace PolicyService.Bo.Infrastructure.Database.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("PoicyNumber")
+                    b.Property<string>("PolicyNumber")
                         .IsRequired()
                         .HasMaxLength(25);
 

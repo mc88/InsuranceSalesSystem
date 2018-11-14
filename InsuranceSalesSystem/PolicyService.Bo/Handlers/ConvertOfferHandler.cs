@@ -7,6 +7,7 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace PolicyService.Bo.Handlers
 {
@@ -21,34 +22,28 @@ namespace PolicyService.Bo.Handlers
 
         public Task<ConvertOfferResponseDto> Handle(ConvertOfferRequestDto request, CancellationToken cancellationToken)
         {
-            try
+            //TODO: validate request
+
+            var offer = dbContext.Offer.Include(x => x.Covers).Include(x => x.PolicyHolder).FirstOrDefault(x => x.OfferNumber == request.OfferNumber);
+
+            if (offer == null)
             {
-                //TODO: validate request
-
-                var offer = dbContext.Offer.FirstOrDefault(x => x.OfferNumber == request.OfferNumber);
-
-                if(offer == null)
-                {
-                    throw new OfferNotFoundException(request.OfferNumber);
-                }
-
-                var policy = offer.ConvertToPolicy();
-                dbContext.Policy.Add(policy);
-                dbContext.SaveChanges();
-
-                var response = new ConvertOfferResponseDto()
-                {
-                    PolicyNumber = policy.PolicyNumber
-                };
-
-                return Task.FromResult(response);
+                throw new OfferNotFoundException(request.OfferNumber);
             }
-            catch (Exception)
+
+            //TODO: check offer is not expired and status
+            //TODO: check if there is no policy created for this offer
+
+            var policy = offer.ConvertToPolicy();
+            dbContext.Policy.Add(policy);
+            dbContext.SaveChanges();
+
+            var response = new ConvertOfferResponseDto()
             {
+                PolicyNumber = policy.PolicyNumber
+            };
 
-                //TODO:
-                return Task.FromResult<ConvertOfferResponseDto>(null);
-            }
+            return Task.FromResult(response);
         }
     }
 }

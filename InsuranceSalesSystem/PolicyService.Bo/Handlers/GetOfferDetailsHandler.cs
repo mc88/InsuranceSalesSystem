@@ -8,6 +8,7 @@ using PolicyService.Api.Dto.Responses;
 using PolicyService.Api.Exceptions;
 using PolicyService.Bo.Infrastructure.Database;
 using PolicyService.Bo.Mappers;
+using Microsoft.EntityFrameworkCore;
 
 namespace PolicyService.Bo.Handlers
 {
@@ -22,29 +23,19 @@ namespace PolicyService.Bo.Handlers
 
         public Task<GetOfferDetailsResponseDto> Handle(GetOfferDetailsRequestDto request, CancellationToken cancellationToken)
         {
-            try
+            var offer = dbContext.Offer.Include(x => x.Covers).Include(x => x.PolicyHolder).FirstOrDefault(x => x.OfferNumber == request.OfferNumber);
+
+            if (offer == null)
             {
-                //TODO: validate request
-
-                var offer = dbContext.Offer.FirstOrDefault(x => x.OfferNumber == request.OfferNumber);
-
-                if (offer == null)
-                {
-                    throw new OfferNotFoundException(request.OfferNumber);
-                }
-
-                var response = new GetOfferDetailsResponseDto()
-                {
-                    Offer = OfferMapper.MapOfferToOfferDto(offer)
-                };
-
-                return Task.FromResult(response);
+                throw new OfferNotFoundException(request.OfferNumber);
             }
-            catch (Exception)
+
+            var response = new GetOfferDetailsResponseDto()
             {
-                //TODO: 
-                throw;
-            }
+                Offer = OfferMapper.MapOfferToOfferDto(offer)
+            };
+
+            return Task.FromResult(response);
         }
     }
 }

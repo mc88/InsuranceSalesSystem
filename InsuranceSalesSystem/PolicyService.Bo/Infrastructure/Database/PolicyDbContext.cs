@@ -12,14 +12,7 @@ namespace PolicyService.Bo.Infrastructure.Database
         public virtual DbSet<OfferCover> OfferCover { get; set; }
         public virtual DbSet<Offer> Offer { get; set; }
 
-        //public PolicyDbContext(DbContextOptions<PolicyDbContext> options) : base(options) { }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
-
-            optionsBuilder.UseSqlServer("Server=MCHROBAK-NB1\\MSSQLSERVER2012;Database=ISS_Policy;Trusted_Connection=True;");
-        }
+        public PolicyDbContext(DbContextOptions<PolicyDbContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -8,6 +8,7 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace PolicyService.Bo.Handlers
 {
@@ -22,37 +23,29 @@ namespace PolicyService.Bo.Handlers
 
         public Task<GetPolicyDetailsResponseDto> Handle(GetPolicyDetailsRequestDto request, CancellationToken cancellationToken)
         {
-            try
+            //TODO: request validation
+
+            var policy = dbContext.Policy.Include(x => x.PolicyVersions).ThenInclude(x => x.PolicyHolder).FirstOrDefault(x => x.PolicyNumber == request.PolicyNumber);
+
+            if (policy == null)
             {
-                //TODO: request validation
-
-                var policy = dbContext.Policy.FirstOrDefault(x => x.PolicyNumber == request.PolicyNumber);
-
-                if (policy == null)
-                {
-                    throw new PolicyNotFoundException(policy.PolicyNumber);
-                }
-
-                var policyVersion = policy.GetPolicyVersion(request.PolicyStartDate);
-
-                if (policyVersion == null)
-                {
-                    //TODO: maybe move this to GetPolicyVersion method in Policy domain ??
-                    throw new PolicyVersionNotFoundException(policy.PolicyNumber, request.PolicyStartDate);
-                }
-
-                var response = new GetPolicyDetailsResponseDto()
-                {
-                    PolicyVersion = PolicyVersionMapper.MapPolicyVersionToPolicyVersionDto(policyVersion)
-                };
-
-                return Task.FromResult(response);
+                throw new PolicyNotFoundException(request.PolicyNumber);
             }
-            catch (Exception)
+
+            var policyVersion = policy.GetPolicyVersion(request.PolicyStartDate);
+
+            if (policyVersion == null)
             {
-                //TODO:
-                throw;
+                //TODO: maybe move this to GetPolicyVersion method in Policy domain ??
+                throw new PolicyVersionNotFoundException(policy.PolicyNumber, request.PolicyStartDate);
             }
+
+            var response = new GetPolicyDetailsResponseDto()
+            {
+                PolicyVersion = PolicyVersionMapper.MapPolicyVersionToPolicyVersionDto(policyVersion)
+            };
+
+            return Task.FromResult(response);
         }
     }
 }

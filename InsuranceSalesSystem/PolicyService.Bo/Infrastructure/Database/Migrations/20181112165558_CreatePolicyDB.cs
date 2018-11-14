@@ -69,7 +69,7 @@ namespace PolicyService.Bo.Infrastructure.Database.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    PoicyNumber = table.Column<string>(maxLength: 25, nullable: false),
+                    PolicyNumber = table.Column<string>(maxLength: 25, nullable: false),
                     VersionNumber = table.Column<string>(maxLength: 25, nullable: false),
                     PolicyFrom = table.Column<DateTime>(nullable: false),
                     PolicyTo = table.Column<DateTime>(nullable: false),

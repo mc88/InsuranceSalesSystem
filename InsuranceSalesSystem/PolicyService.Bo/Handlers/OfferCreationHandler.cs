@@ -20,34 +20,25 @@ namespace PolicyService.Bo.Handlers
 
         public Task<CreateOfferResponseDto> Handle(CreateOfferRequestDto request, CancellationToken cancellationToken)
         {
-            try
+            //TODO: add request validtion 
+
+            //TODO: get price from PricingService
+            decimal price = 0;
+
+            var offer = new Offer(request, price);
+
+            dbContext.Offer.Add(offer);
+
+            dbContext.SaveChanges();
+
+            var response = new CreateOfferResponseDto()
             {
-                //TODO: add request validtion 
+                OfferNumber = offer.OfferNumber,
+                OfferValidityEnd = offer.ValidTo,
+                TotalPrice = price
+            };
 
-                //TODO: get price from PricingService
-                decimal price = 0;
-
-                var offer = new Offer(request, price);
-
-                dbContext.Offer.Add(offer);
-
-                dbContext.SaveChanges();
-
-                var response = new CreateOfferResponseDto()
-                {
-                    OfferNumber = offer.OfferNumber,
-                    OfferValidityEnd = offer.ValidTo,
-                    TotalPrice = price
-                };
-
-                return Task.FromResult(response);
-            }
-            catch(Exception ex)
-            {
-                //TODO
-
-                return Task.FromResult<CreateOfferResponseDto>(null);
-            }
+            return Task.FromResult(response);
         }
     }
 }

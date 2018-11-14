@@ -2,6 +2,7 @@
 using PolicyService.Api.Enums;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PolicyService.Bo.Domain
 {
@@ -21,6 +22,10 @@ namespace PolicyService.Bo.Domain
             ProductCode = request.ProductCode;
             TotalPrice = calculatedPrice;
             ValidTo = DateTime.Now.AddDays(OFFER_VALIDITY_IN_DAYS);
+
+            //TODO: offer prices should be passed as list
+            var offerPrice = 0;
+            Covers = request.SelectedCovers.Select(x => new OfferCover(x, request.PolicyFrom, request.PolicyTo, offerPrice)).ToList();
         }
 
         public string OfferNumber { get; set; }
@@ -43,18 +48,12 @@ namespace PolicyService.Bo.Domain
 
         public Policy ConvertToPolicy()
         {
-            //TODO: map policyVersion, creation policy should be in Policy domain
-            return new Policy()
-            {
-                PolicyNumber = OfferNumber,
-                PolicyVersions = null,
-                ProductCode = ProductCode
-            };
+            return new Policy(this);
         }
 
         private string GenerateNumberForNewOffer()
         {
-            throw new NotImplementedException();
+            return $"OFF_{DateTime.Now.Ticks}";
         }
     }
 }

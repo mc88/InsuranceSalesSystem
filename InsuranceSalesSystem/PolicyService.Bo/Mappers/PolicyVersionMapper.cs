@@ -9,7 +9,7 @@ namespace PolicyService.Bo.Mappers
         {
             return new PolicyVersionDto()
             {
-                PoicyNumber = policyVersion.PolicyNumber,
+                PolicyNumber = policyVersion.PolicyNumber,
                 PolicyHolder = PolicyHolderMapper.MapPolicyHolderToPersonDto(policyVersion.PolicyHolder),
                 PolicyFrom = policyVersion.PolicyFrom,
                 PolicyStatus = policyVersion.PolicyStatus,

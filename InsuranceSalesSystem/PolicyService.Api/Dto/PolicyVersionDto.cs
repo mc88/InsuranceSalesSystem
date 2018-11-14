@@ -5,7 +5,7 @@ namespace PolicyService.Api.Dto
 {
     public class PolicyVersionDto
     {
-        public string PoicyNumber { get; set; }
+        public string PolicyNumber { get; set; }
 
         public string VersionNumber { get; set; }
 

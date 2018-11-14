@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PolicyService.Api.Enums;
+using PolicyService.Api.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -24,13 +26,22 @@ namespace PolicyService.Bo.Domain
 
         public PolicyVersion Terminate(DateTime date)
         {
-            throw new NotImplementedException();
+            var policyVersion = this.GetPolicyVersion(date);
+
+            if (policyVersion == null)
+            {
+                //TODO: maybe move this to GetPolicyVersion method in Policy domain ??
+                throw new PolicyVersionNotFoundException(PolicyNumber, date);
+            }
+
+            policyVersion.PolicyStatus = PolicyStatus.Terminated;
+
+            return policyVersion;
         }
 
         public PolicyVersion GetPolicyVersion(DateTime date)
         {
-            //TODO: make sure that this condition is ok
-            return PolicyVersions.FirstOrDefault(x => x.PolicyFrom == date);
+            return PolicyVersions.FirstOrDefault(x => x.PolicyFrom <= date && x.PolicyTo >= date);
         }
     }
 }
