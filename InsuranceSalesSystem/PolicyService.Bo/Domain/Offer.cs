@@ -1,4 +1,5 @@
-﻿using PolicyService.Api.Dto.Requests;
+﻿using PolicyService.Api.Dto.Pricing.Responses;
+using PolicyService.Api.Dto.Requests;
 using PolicyService.Api.Enums;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace PolicyService.Bo.Domain
 
         public Offer() { }
 
-        public Offer(CreateOfferRequestDto request, decimal calculatedPrice)
+        public Offer(CreateOfferRequestDto request, CalculatePriceResponseDto calculatedPrice)
         {
             OfferNumber = GenerateNumberForNewOffer();
             OfferStatus = OfferStatus.Active;
@@ -20,12 +21,11 @@ namespace PolicyService.Bo.Domain
             PolicyTo = request.PolicyTo;
             PolicyHolder = new PolicyHolder(request.PolicyHolder);
             ProductCode = request.ProductCode;
-            TotalPrice = calculatedPrice;
+            TotalPrice = calculatedPrice.TotalPrice;
             ValidTo = DateTime.Now.AddDays(OFFER_VALIDITY_IN_DAYS);
-
-            //TODO: offer prices should be passed as list
-            var offerPrice = 0;
-            Covers = request.SelectedCovers.Select(x => new OfferCover(x, request.PolicyFrom, request.PolicyTo, offerPrice)).ToList();
+            Covers = request.SelectedCovers.Select(x => 
+                    new OfferCover(x, request.PolicyFrom, request.PolicyTo, calculatedPrice.CoverPrices[x]))
+                .ToList();
         }
 
         public string OfferNumber { get; set; }

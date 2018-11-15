@@ -1,10 +1,9 @@
 ﻿using System;
 
-namespace PricingService.Bo.Utils
+namespace PolicyService.Bo.Utils
 {
     public static class AgeUtils
     {
-        //TODO: move this logic to PolicyService and send age from PolicyService
         public static int CalculateAgeFromPesel(string pesel)
         {
             DateTime today = DateTime.Today;

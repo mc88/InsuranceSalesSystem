@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PolicyService.Bo.Handlers;
+using PolicyService.Bo.Infrastructure.Communication.REST;
 using PolicyService.Bo.Infrastructure.Database;
 
 namespace PolicyService.Web
@@ -25,6 +26,7 @@ namespace PolicyService.Web
             services.AddMediatR(typeof(OfferCreationHandler).Assembly);
             services.AddDbContext<PolicyDbContext>(options =>
              options.UseSqlServer(Configuration.GetConnectionString("PolicyDb")));
+            services.AddScoped(x => new PricingApiFacade(Configuration.GetSection("ApiUrls")["PricingApiUrl"]));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
