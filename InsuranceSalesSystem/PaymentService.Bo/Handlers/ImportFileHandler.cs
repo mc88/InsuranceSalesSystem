@@ -25,7 +25,7 @@ namespace PaymentService.Bo.Handlers
 
         public Task<ImportFileResponseDto> Handle(ImportFileRequestDto request, CancellationToken cancellationToken)
         {
-            var bankStatements = ReadFile(request);
+            var bankStatements = ReadFile(request.PathToFile);
             var affectedPolicies = bankStatements.Select(x => x.PolicyNumber).Distinct().ToList();
 
             var policyAccounts = dbContext.PolicyAccount.Include(x => x.AccountOperations)
