@@ -21,11 +21,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PricingService.Web", "Prici
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PricingService.Bo", "PricingService.Bo\PricingService.Bo.csproj", "{777F8DC0-C111-4BF9-A20D-414887CF4535}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolicyService.Api", "PolicyService.Api\PolicyService.Api.csproj", "{D4FFEE23-943C-41A1-8DDF-2F8AAEA57B2A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PolicyService.Api", "PolicyService.Api\PolicyService.Api.csproj", "{D4FFEE23-943C-41A1-8DDF-2F8AAEA57B2A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolicyService.Bo", "PolicyService.Bo\PolicyService.Bo.csproj", "{DAEE2D99-39BE-4D03-89AA-BF8133351CA0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PolicyService.Bo", "PolicyService.Bo\PolicyService.Bo.csproj", "{DAEE2D99-39BE-4D03-89AA-BF8133351CA0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolicyService.Web", "PolicyService.Web\PolicyService.Web.csproj", "{F457B211-8412-4CAB-AA9B-B0EDA7D463D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PolicyService.Web", "PolicyService.Web\PolicyService.Web.csproj", "{F457B211-8412-4CAB-AA9B-B0EDA7D463D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentService.Api", "PaymentService.Api\PaymentService.Api.csproj", "{9B0EF294-9F87-4A06-8A94-2469F60D14B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentService.Bo", "PaymentService.Bo\PaymentService.Bo.csproj", "{54AAED45-71D3-44F4-80C0-72F9A19FD3AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentService.Web", "PaymentService.Web\PaymentService.Web.csproj", "{C7FA430A-AC85-470A-8025-53DE372196F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +63,18 @@ Global
 		{F457B211-8412-4CAB-AA9B-B0EDA7D463D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F457B211-8412-4CAB-AA9B-B0EDA7D463D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F457B211-8412-4CAB-AA9B-B0EDA7D463D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B0EF294-9F87-4A06-8A94-2469F60D14B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B0EF294-9F87-4A06-8A94-2469F60D14B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B0EF294-9F87-4A06-8A94-2469F60D14B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B0EF294-9F87-4A06-8A94-2469F60D14B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54AAED45-71D3-44F4-80C0-72F9A19FD3AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54AAED45-71D3-44F4-80C0-72F9A19FD3AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54AAED45-71D3-44F4-80C0-72F9A19FD3AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54AAED45-71D3-44F4-80C0-72F9A19FD3AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7FA430A-AC85-470A-8025-53DE372196F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7FA430A-AC85-470A-8025-53DE372196F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7FA430A-AC85-470A-8025-53DE372196F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7FA430A-AC85-470A-8025-53DE372196F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,6 +89,9 @@ Global
 		{D4FFEE23-943C-41A1-8DDF-2F8AAEA57B2A} = {FA1CF9C6-CEBC-46E7-9600-19EEF0B2A5A5}
 		{DAEE2D99-39BE-4D03-89AA-BF8133351CA0} = {FA1CF9C6-CEBC-46E7-9600-19EEF0B2A5A5}
 		{F457B211-8412-4CAB-AA9B-B0EDA7D463D1} = {FA1CF9C6-CEBC-46E7-9600-19EEF0B2A5A5}
+		{9B0EF294-9F87-4A06-8A94-2469F60D14B8} = {70790C14-65DB-474C-845A-FEC9E054C392}
+		{54AAED45-71D3-44F4-80C0-72F9A19FD3AA} = {70790C14-65DB-474C-845A-FEC9E054C392}
+		{C7FA430A-AC85-470A-8025-53DE372196F3} = {70790C14-65DB-474C-845A-FEC9E054C392}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C20FF921-117E-46E1-876B-445D5730036E}
