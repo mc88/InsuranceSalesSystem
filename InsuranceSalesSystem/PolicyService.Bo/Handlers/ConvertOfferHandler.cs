@@ -8,16 +8,21 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using PolicyService.Bo.Infrastructure.Communication.Events;
+using PolicyService.Api.Dto.Events;
+using PolicyService.Bo.Domain;
 
 namespace PolicyService.Bo.Handlers
 {
     public class ConvertOfferHandler : IRequestHandler<ConvertOfferRequestDto, ConvertOfferResponseDto>
     {
         private readonly PolicyDbContext dbContext;
+        private readonly IEventPublisher eventPublisher;
 
-        public ConvertOfferHandler(PolicyDbContext dbContext)
+        public ConvertOfferHandler(PolicyDbContext dbContext, IEventPublisher eventPublisher)
         {
             this.dbContext = dbContext;
+            this.eventPublisher = eventPublisher;
         }
 
         public Task<ConvertOfferResponseDto> Handle(ConvertOfferRequestDto request, CancellationToken cancellationToken)
@@ -38,12 +43,26 @@ namespace PolicyService.Bo.Handlers
             dbContext.Policy.Add(policy);
             dbContext.SaveChanges();
 
+            PublishEvents(policy, offer);
+
             var response = new ConvertOfferResponseDto()
             {
                 PolicyNumber = policy.PolicyNumber
             };
 
             return Task.FromResult(response);
+        }
+
+        private void PublishEvents(Policy policy, Offer offer)
+        {
+            var policyCreateEvent = new PolicyCreatedEvent()
+            {
+                PolicyNumber = policy.PolicyNumber,
+                PolicyStartDate = offer.PolicyFrom,
+                Price = offer.TotalPrice
+            };
+
+            eventPublisher.Publish(policyCreateEvent);
         }
     }
 }

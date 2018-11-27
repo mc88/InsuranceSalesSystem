@@ -5,8 +5,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PolicyService.Bo.Handlers;
+using PolicyService.Bo.Infrastructure.Communication.Events;
 using PolicyService.Bo.Infrastructure.Communication.REST;
 using PolicyService.Bo.Infrastructure.Database;
+using RabbitMQ.Client;
 
 namespace PolicyService.Web
 {
@@ -27,6 +29,12 @@ namespace PolicyService.Web
             services.AddDbContext<PolicyDbContext>(options =>
              options.UseSqlServer(Configuration.GetConnectionString("PolicyDb")));
             services.AddScoped(x => new PricingApiFacade(Configuration.GetSection("ApiUrls")["PricingApiUrl"]));
+            services.AddScoped<IConnectionFactory>(x => 
+                new ConnectionFactory()
+                {
+                    HostName = Configuration.GetSection("RabbitMq")["HostName"]
+                });
+            services.AddScoped<IEventPublisher, EventPublisher>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

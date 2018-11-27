@@ -6,6 +6,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PaymentService.Bo.Handlers;
 using PaymentService.Bo.Infrastructure.Database;
+using PaymentService.Bo.Integration;
+using PaymentService.Web.Listeners;
+using RabbitMQ.Client;
 
 namespace PaymentService.Web
 {
@@ -25,6 +28,13 @@ namespace PaymentService.Web
             services.AddMediatR(typeof(CreateAccountForPolicyHandler).Assembly);
             services.AddDbContext<PaymentDbContext>(options =>
              options.UseSqlServer(Configuration.GetConnectionString("PaymentDb")));
+            services.AddScoped<IConnectionFactory>(x =>
+                new ConnectionFactory()
+                {
+                    HostName = Configuration.GetSection("RabbitMq")["HostName"]
+                });
+            services.AddScoped<IntegrationEventHandlerFactory>();
+            services.AddSingleton<RabbitMqListener>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,6 +46,8 @@ namespace PaymentService.Web
             }
 
             app.UseMvc();
+
+            app.ApplicationServices.GetRequiredService<RabbitMqListener>().Listen();
         }
     }
 }
