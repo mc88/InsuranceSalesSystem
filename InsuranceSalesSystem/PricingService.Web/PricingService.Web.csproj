@@ -5,8 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Listeners\" />
-    <Folder Include="wwwroot\" />
+    <Compile Remove="Listeners\**" />
+    <Compile Remove="wwwroot\**" />
+    <Content Remove="Listeners\**" />
+    <Content Remove="wwwroot\**" />
+    <EmbeddedResource Remove="Listeners\**" />
+    <EmbeddedResource Remove="wwwroot\**" />
+    <None Remove="Listeners\**" />
+    <None Remove="wwwroot\**" />
   </ItemGroup>
 
   <ItemGroup>

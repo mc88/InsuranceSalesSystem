@@ -35,7 +35,6 @@ namespace PolicyService.Bo.Handlers
                 SelectedCovers = request.SelectedCovers
             };
 
-            //TODO: it should be called here? or maybe in controller?
             var calculatePriceResponse = pricingApiFacade.CalculatePrice(calculatePriceRequest);
 
             var offer = new Offer(request, calculatePriceResponse);

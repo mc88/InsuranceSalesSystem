@@ -19,9 +19,7 @@ namespace PolicyService.Bo.Infrastructure.Communication.Events
         {
             //TODO: move "magic strings" to configuration
 
-            IConnectionFactory factory = new ConnectionFactory() { HostName = "localhost" };
-
-            using (var connection = factory.CreateConnection())
+            using (var connection = connectionFactory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
                 channel.ExchangeDeclare(exchange: "iss-exchange", type: "direct");

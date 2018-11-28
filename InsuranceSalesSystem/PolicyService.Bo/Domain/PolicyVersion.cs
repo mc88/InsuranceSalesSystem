@@ -15,9 +15,8 @@ namespace PolicyService.Bo.Domain
             VersionNumber = GetVersionNumber(1);
             PolicyFrom = offer.PolicyFrom;
             PolicyTo = offer.PolicyTo;
-            //TODO
-            //VersionFrom = ??
-            //VersionTo = ??
+            VersionFrom = offer.PolicyFrom;
+            VersionTo = offer.PolicyTo;
             ProductCode = offer.ProductCode;
             PolicyStatus = PolicyStatus.Active;
             PolicyHolder = offer.PolicyHolder;
