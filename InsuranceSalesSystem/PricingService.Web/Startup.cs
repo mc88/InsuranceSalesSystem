@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PricingService.Bo.Handlers;
 using PricingService.Bo.Infrastructure.Database;
+using PricingService.Web.Infrastracture;
 
 namespace PricingService.Web
 {
@@ -36,6 +37,7 @@ namespace PricingService.Web
             }
 
             app.UseMvc();
+            app.InitializeDatabase();
         }
     }
 }
