@@ -8,6 +8,7 @@ using PolicyService.Bo.Handlers;
 using PolicyService.Bo.Infrastructure.Communication.Events;
 using PolicyService.Bo.Infrastructure.Communication.REST;
 using PolicyService.Bo.Infrastructure.Database;
+using PricingService.Web.Infrastracture;
 using RabbitMQ.Client;
 
 namespace PolicyService.Web
@@ -46,6 +47,7 @@ namespace PolicyService.Web
             }
 
             app.UseMvc();
+            app.InitializeDatabase();
         }
     }
 }

@@ -13,5 +13,21 @@ services:
     build:
       context: .
       dockerfile: PricingService.Web/Dockerfile
+    ports:
+      - "5001:80"
     depends_on:
       - sql.data
+  
+  #TODO applicationSettings PricingApiUrl contains ip of pricingservice.web container, this ip is not static, need to find way to resolve this apiurl differently (by using container name/ip)
+  policyservice.web:
+    image: policyservice.web
+    build:
+      context: .
+      dockerfile: PolicyService.Web/Dockerfile
+    ports:
+      - "5002:80"
+    depends_on:
+      - pricingservice.web
+      - sql.data
+
+
