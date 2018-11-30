@@ -8,6 +8,13 @@ services:
       - ACCEPT_EULA=Y
     ports:
       - "5434:1433"
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+
   pricingservice.web:
     image: pricingservice.web
     build:
@@ -29,5 +36,16 @@ services:
     depends_on:
       - pricingservice.web
       - sql.data
+      - rabbitmq
 
+  paymentservice.web:
+    image: paymentservice.web
+    build:
+      context: .
+      dockerfile: PaymentService.Web/Dockerfile
+    ports:
+      - "5003:80"
+    depends_on:
+      - sql.data
+      - rabbitmq
 

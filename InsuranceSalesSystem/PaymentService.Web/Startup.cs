@@ -8,6 +8,7 @@ using PaymentService.Bo.Handlers;
 using PaymentService.Bo.Infrastructure.Database;
 using PaymentService.Bo.Integration;
 using PaymentService.Web.Listeners;
+using PricingService.Web.Infrastracture;
 using RabbitMQ.Client;
 
 namespace PaymentService.Web
@@ -46,7 +47,7 @@ namespace PaymentService.Web
             }
 
             app.UseMvc();
-
+            app.InitializeDatabase();
             app.ApplicationServices.GetRequiredService<RabbitMqListener>().Listen();
         }
     }
