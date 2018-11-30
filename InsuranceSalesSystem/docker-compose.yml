@@ -25,7 +25,6 @@ services:
     depends_on:
       - sql.data
   
-  #TODO applicationSettings PricingApiUrl contains ip of pricingservice.web container, this ip is not static, need to find way to resolve this apiurl differently (by using container name/ip)
   policyservice.web:
     image: policyservice.web
     build:
