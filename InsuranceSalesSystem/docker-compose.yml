@@ -3,25 +3,15 @@ version: '3'
 services:
   sql.data:
     image: microsoft/mssql-server-linux:2017-latest
-    environment:
-      - SA_PASSWORD=Pass@word1
-      - ACCEPT_EULA=Y
-    ports:
-      - "5434:1433"
 
   rabbitmq:
     image: rabbitmq:3-management-alpine
-    ports:
-      - "15672:15672"
-      - "5672:5672"
 
   pricingservice.web:
     image: pricingservice.web
     build:
       context: .
       dockerfile: PricingService.Web/Dockerfile
-    ports:
-      - "5001:80"
     depends_on:
       - sql.data
   
@@ -30,8 +20,6 @@ services:
     build:
       context: .
       dockerfile: PolicyService.Web/Dockerfile
-    ports:
-      - "5002:80"
     depends_on:
       - pricingservice.web
       - sql.data
@@ -42,8 +30,6 @@ services:
     build:
       context: .
       dockerfile: PaymentService.Web/Dockerfile
-    ports:
-      - "5003:80"
     depends_on:
       - sql.data
       - rabbitmq

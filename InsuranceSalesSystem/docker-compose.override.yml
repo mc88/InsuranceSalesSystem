@@ -1,22 +1,40 @@
 version: '3'
 
 services:
+  sql.data:
+    environment:
+      - SA_PASSWORD=Pass@word1
+      - ACCEPT_EULA=Y
+    ports:
+      - "5434:1433"
+
+  rabbitmq:
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+
   pricingservice.web:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__PricingDb=Server=${MS_SQL_SERVER_HOSTNAME_OR_IP};Database=ISS_Pricing;User Id=sa;Password=Pass@word1
     ports:
-      - "80"
+      - "5001:80"
 
   policyservice.web:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__PolicyDb=Server=${MS_SQL_SERVER_HOSTNAME_OR_IP};Database=ISS_Policy;User Id=sa;Password=Pass@word1
+      - RabbitMq__HostName=rabbitmq
+      - ApiUrls__PricingApiUrl=http://${PRICING_SERVICE_HOSTNAME_OR_IP}/api
     ports:
-      - "80"
+      - "5002:80"
 
 
   paymentservice.web:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__PaymentDb=Server=${MS_SQL_SERVER_HOSTNAME_OR_IP};Database=ISS_Payment;User Id=sa;Password=Pass@word1
+      - RabbitMq__HostName=rabbitmq
     ports:
-      - "80"
+      - "5003:80"
 

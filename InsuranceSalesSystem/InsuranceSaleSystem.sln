@@ -13,8 +13,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{C327388E-BB5F-
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{6397EED4-FDE3-446F-9E84-8784269D9A61}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BulidingBlocks", "BulidingBlocks", "{99015026-2DC3-444C-987F-A7D4EE7ABE94}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PricingService.Api", "PricingService.Api\PricingService.Api.csproj", "{97B87D5F-A00B-44C1-940D-B6B62D7EC447}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PricingService.Web", "PricingService.Web\PricingService.Web.csproj", "{1853F77F-26C1-4EA7-9375-9428402EE234}"
@@ -34,6 +32,11 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaymentService.Web", "PaymentService.Web\PaymentService.Web.csproj", "{C7FA430A-AC85-470A-8025-53DE372196F3}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{E9B2A6F0-9D31-42F6-89A9-546602350129}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DA892FA9-C601-4426-983B-B25EEA51699C}"
+	ProjectSection(SolutionItems) = preProject
+		.env = .env
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
