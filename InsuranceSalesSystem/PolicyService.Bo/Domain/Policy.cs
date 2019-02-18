@@ -6,13 +6,13 @@ using System.Linq;
 
 namespace PolicyService.Bo.Domain
 {
-    //TODO : Policy should inherit Offer according docs - if not inherit it should have association with Offer
-    public class Policy : BaseEntity //: Offer
+    public class Policy : BaseEntity
     {
         public Policy() { }
 
         public Policy(Offer offer)
         {
+            Offer = offer;
             PolicyNumber = offer.OfferNumber;
             ProductCode = offer.ProductCode;
             PolicyVersions = new List<PolicyVersion>() { new PolicyVersion(offer) };
@@ -21,6 +21,8 @@ namespace PolicyService.Bo.Domain
         public string PolicyNumber { get; set; }
 
         public string ProductCode { get; set; }
+
+        public Offer Offer { get; set; }
 
         public IList<PolicyVersion> PolicyVersions { get; set; }
 
