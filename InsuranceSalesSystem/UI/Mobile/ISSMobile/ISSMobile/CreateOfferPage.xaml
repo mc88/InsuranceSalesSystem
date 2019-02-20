@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ISSMobile.CreateOfferPage">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="Center" Spacing="20" Padding="20">
+            <Label Text="Fill Request Policy Form"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Text="Product:" />
+                <Label Grid.Row="1" Grid.Column="0" Text="Covers:" />
+                <Label Grid.Row="2" Grid.Column="0" Text="Start date:" />
+                <Label Grid.Row="3" Grid.Column="0" Text="End date:" />
+                <Label Grid.Row="4" Grid.Column="0" Text="First name:" />
+                <Label Grid.Row="5" Grid.Column="0" Text="Last name:" />
+                <Label Grid.Row="6" Grid.Column="0" Text="Pesel:" />
+
+                <Picker Grid.Row="0" Grid.Column="1" SelectedIndexChanged="ProductChanged" SelectedIndex="0">
+                    <Picker.Items>
+                        <x:String>GOLDEN_HEALTH</x:String>
+                        <x:String>SILVER_HEALTH</x:String>
+                    </Picker.Items>
+                </Picker>
+
+                <Picker Grid.Row="1" Grid.Column="1" SelectedIndexChanged="CoverChanged" SelectedIndex="0">
+                    <Picker.Items>
+                        <x:String>COVER1</x:String>
+                        <x:String>COVER2</x:String>
+                    </Picker.Items>
+                </Picker>
+
+                <DatePicker Grid.Row="2" Grid.Column="1" Date="{Binding PolicyFrom}" />
+                <DatePicker Grid.Row="3" Grid.Column="1" Date="{Binding PolicyTo}" />
+
+                <Entry Grid.Row="4" Grid.Column="1" Text="{Binding PolicyHolder.FirstName}" />
+                <Entry Grid.Row="5" Grid.Column="1" Text="{Binding PolicyHolder.LastName}" />
+                <Entry Grid.Row="6" Grid.Column="1" Text="{Binding PolicyHolder.Pesel}" />
+            </Grid>
+            <Button Text="Request Policy" Clicked="RequestPolicy" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
