@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using PolicyService.Api.Dto.Requests;
 using PolicyService.Api.Dto.Responses;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PolicyService.Web.Controllers
@@ -36,6 +37,14 @@ namespace PolicyService.Web.Controllers
         public async Task<TerminatePolicyResponseDto> Terminate([FromBody] TerminatePolicyRequestDto request)
         {
             TerminatePolicyResponseDto response = await mediator.Send(request);
+
+            return response;
+        }
+
+        [HttpGet("GetAll")]
+        public async Task<GetPoliciesResponseDto> GetAll()
+        {
+            GetPoliciesResponseDto response = await mediator.Send(new GetPoliciesRequestDto());
 
             return response;
         }

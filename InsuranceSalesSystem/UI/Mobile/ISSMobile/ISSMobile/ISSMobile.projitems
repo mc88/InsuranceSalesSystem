@@ -12,11 +12,21 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)App.xaml" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)MainPage.xaml" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)LoginPage.xaml" />
-	<EmbeddedResource Include="$(MSBuildThisFileDirectory)CreateOfferPage.xaml"/>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)CreateOfferPage.xaml" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)ManagerPage.xaml" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)OffersPage.xaml" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)PoliciesPage.xaml" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)PoliciesPageMaster.xaml" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)PoliciesPageDetail.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\OfferStatus.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\PolicyStatus.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ManagerPage.xaml.cs">
+      <DependentUpon>ManagerPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Model\CreateOfferModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\LoginModel.cs" />
@@ -26,12 +36,26 @@
     <Compile Include="$(MSBuildThisFileDirectory)LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
-	<Compile Include="$(MSBuildThisFileDirectory)CreateOfferPage.xaml.cs">
+    <Compile Include="$(MSBuildThisFileDirectory)CreateOfferPage.xaml.cs">
       <DependentUpon>CreateOfferPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Model\Offer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\OfferDetails.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\OffersDetails.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\PersonModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OffersPage.xaml.cs">
+      <DependentUpon>OffersPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)PoliciesPage.xaml.cs">
+      <DependentUpon>PoliciesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)PoliciesPageDetail.xaml.cs">
+      <DependentUpon>PoliciesPageDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)PoliciesPageMaster.xaml.cs">
+      <DependentUpon>PoliciesPageMaster.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)PoliciesPageMenuItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\RestService.cs" />
   </ItemGroup>
 </Project>

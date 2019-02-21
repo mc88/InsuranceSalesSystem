@@ -12,7 +12,7 @@ namespace PolicyService.Bo.Domain
 
         public Policy(Offer offer)
         {
-            Offer = offer;
+            //Offer = offer;
             PolicyNumber = offer.OfferNumber;
             ProductCode = offer.ProductCode;
             PolicyVersions = new List<PolicyVersion>() { new PolicyVersion(offer) };
@@ -22,7 +22,7 @@ namespace PolicyService.Bo.Domain
 
         public string ProductCode { get; set; }
 
-        public Offer Offer { get; set; }
+        //public Offer Offer { get; set; }
 
         public IList<PolicyVersion> PolicyVersions { get; set; }
 

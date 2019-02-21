@@ -8,7 +8,7 @@ namespace ISSMobile
 		{
 			InitializeComponent();
 
-            var navigationPage = new NavigationPage(new LoginPage());
+            var navigationPage = new NavigationPage(new ManagerPage());
             MainPage = navigationPage;
         }
 

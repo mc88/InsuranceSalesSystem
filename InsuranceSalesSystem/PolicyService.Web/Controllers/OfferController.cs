@@ -45,5 +45,13 @@ namespace PolicyService.Web.Controllers
 
             return response;
         }
+
+        [HttpGet("GetAll")]
+        public async Task<GetOffersResponseDto> GetAll()
+        {
+            GetOffersResponseDto response = await mediator.Send(new GetOffersRequestDto());
+
+            return response;
+        }
     }
 }

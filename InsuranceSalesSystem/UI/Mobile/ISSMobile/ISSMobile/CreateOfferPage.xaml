@@ -50,6 +50,7 @@
                 <Entry Grid.Row="6" Grid.Column="1" Text="{Binding PolicyHolder.Pesel}" />
             </Grid>
             <Button Text="Request Policy" Clicked="RequestPolicy" />
+            <Button Text="Cancel" Clicked="Cancel" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

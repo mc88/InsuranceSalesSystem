@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ISSMobile.OffersPage">
+    <StackLayout>
+        <ListView x:Name="MyListView"
+            ItemsSource="{Binding Items}"
+            ItemTapped="Handle_ItemTapped"
+            CachingStrategy="RecycleElement">
+
+            <!--Built in Cells-->
+            <!--<ListView.ItemTemplate>
+        <DataTemplate>
+            <TextCell Text="{Binding .}" />
+        </DataTemplate>
+    </ListView.ItemTemplate>-->
+
+            <!--<ListView.ItemTemplate>
+            <DataTemplate>
+                <TextCell Text="{Binding OfferNumber}" />
+                <TextCell Text="{Binding ProductCode}" />
+            </DataTemplate>
+        </ListView.ItemTemplate>-->
+
+            <!--Custom View Cells-->
+            <!--
+    <ListView.ItemTemplate>
+      <DataTemplate>
+        <ViewCell>
+          <StackLayout>
+            <Label Text="{Binding Text}" 
+                   Style="{DynamicResource ListItemTextStyle}" />
+            <Label Text="{Binding Detail}" 
+                   Style="{DynamicResource ListItemDetailTextStyle}"/>
+          </StackLayout>
+        </ViewCell>
+      </DataTemplate>
+    </ListView.ItemTemplate>
+    -->
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" BackgroundColor="LightGray">
+                            <Label Text="{Binding OfferNumber}" FontAttributes="Bold" />
+                            <Label Text="{Binding ProductCode}" />
+                            <Label Text="{Binding OfferStatus}" TextColor="{Binding StatusColor}" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Button Text="Buy Policy" Clicked="BuyPolicy" />
+        <Button Text="New policy request" Clicked="CreateOffer" />
+        <Button Text="Refresh" Clicked="RefreshItems" />
+    </StackLayout>
+</ContentPage>

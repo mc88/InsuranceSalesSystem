@@ -41,12 +41,18 @@ namespace ISSMobile
                 var result = await RestService.Post<object>(url, BindingContext);
 
                 await DisplayAlert("Response", JsonConvert.SerializeObject(result), "OK");
+                Cancel(sender, e);
             }
             catch (Exception ex)
             {
                 await DisplayAlert("Exception occured!", ex.Message, "OK");
                 throw;
             }
+        }
+
+        async void Cancel(object sender, EventArgs e)
+        {
+            await Navigation.PopModalAsync();
         }
 	}
 }

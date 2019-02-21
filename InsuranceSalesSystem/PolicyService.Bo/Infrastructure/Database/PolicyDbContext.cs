@@ -108,7 +108,7 @@ namespace PolicyService.Bo.Infrastructure.Database
                     .HasMaxLength(25)
                     .IsRequired();
 
-                entity.HasOne(x => x.Offer);
+                //entity.HasOne(x => x.Offer);
             });
 
             modelBuilder.Entity<OfferCover>(entity =>
