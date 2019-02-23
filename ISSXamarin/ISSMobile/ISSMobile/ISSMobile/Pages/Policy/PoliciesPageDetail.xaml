@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:iconize="clr-namespace:Plugin.Iconize;assembly=Plugin.Iconize"
+             xmlns:sv="clr-namespace:XFShapeView;assembly=XFShapeView"
+             x:Class="ISSMobile.PoliciesPageDetail"
+             Title="Detail">
+  <StackLayout Padding="10">
+    <Label Text="This is a detail page. To get the 'triple' line icon on each platform add a icon to each platform and update the 'Master' page with an Icon that references it."/>
+        <!--<iconize:IconImage HeightRequest="20" WidthRequest="20" Icon="fas-car" IconColor="Blue"/>
+        <iconize:IconLabel Text="fas-home"
+                               HorizontalOptions="EndAndExpand"
+                               TextColor="Red"
+                               FontSize="25">
+        </iconize:IconLabel>-->
+        <iconize:IconButton  HeightRequest="20" WidthRequest="20" Text="md-airplane"/>
+        <sv:ShapeView ShapeType="Box"
+                          MinimumHeightRequest="90"
+                          Color="Green"
+                          CornerRadius="10"
+                          Padding="0,3,0,3">
+            <Grid Padding="0,0,0,5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Text="Assistance"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       Grid.ColumnSpan="2" />
+                <Label Text="Characteristics:"
+                       Grid.Row="1"
+                       Grid.Column="0" />
+                <Label Text="ADSdsadasd"
+                       LineBreakMode="WordWrap"
+                       HorizontalOptions="FillAndExpand"
+                       Grid.Row="1"
+                       Grid.Column="1" />
+                <Label Text="Prev. Assistances:"
+                       Grid.Row="2"
+                       Grid.Column="0" />
+                <Label Text="asdsadafs"
+                       LineBreakMode="WordWrap"
+                       HorizontalOptions="FillAndExpand"
+                       Grid.Row="2"
+                       Grid.Column="1" />
+            </Grid>
+        </sv:ShapeView>
+    </StackLayout>
+</ContentPage>

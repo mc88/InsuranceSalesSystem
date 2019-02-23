@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ISSMobile.LoginPage">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="Center" Spacing="20" Padding="20">
+            <Entry Placeholder="Login" Text="{Binding Credentials.Login}" />
+            <Entry Placeholder="Password" Text="{Binding Credentials.Password}" />
+            <Button Text="Log In" Command="{Binding LogIn}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

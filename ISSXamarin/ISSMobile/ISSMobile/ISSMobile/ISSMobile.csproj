@@ -1,0 +1,57 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FreshMvvm" Version="2.2.4" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="VG.XFShapeView.NetCore" Version="1.1.0" />
+    <PackageReference Include="Xam.Plugin.Iconize" Version="3.5.0.115" />
+    <PackageReference Include="Xam.Plugin.Iconize.EntypoPlus" Version="3.5.0.115" />
+    <PackageReference Include="Xam.Plugin.Iconize.FontAwesome" Version="3.5.0.115" />
+    <PackageReference Include="Xam.Plugin.Iconize.Ionicons" Version="3.5.0.115" />
+    <PackageReference Include="Xam.Plugin.Iconize.Material" Version="3.5.0.115" />
+    <PackageReference Include="Xam.Plugin.Iconize.Meteocons" Version="3.5.0.115" />
+    <PackageReference Include="Xam.Plugin.Iconize.SimpleLineIcons" Version="3.5.0.115" />
+    <PackageReference Include="Xam.Plugin.Iconize.Typicons" Version="3.5.0.115" />
+    <PackageReference Include="Xam.Plugin.Iconize.WeatherIcons" Version="3.5.0.115" />
+    <PackageReference Include="Xamarin.Forms" Version="3.5.0.169047" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Pages\Policy\PoliciesPageMenuItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Pages\LoginPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\ManagePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Offer\CreateOfferPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Offer\OffersPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Policy\PoliciesPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Policy\PoliciesPageDetail.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Policy\PoliciesPageMaster.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

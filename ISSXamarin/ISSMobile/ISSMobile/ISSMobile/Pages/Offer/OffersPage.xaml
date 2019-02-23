@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:iconize="clr-namespace:Plugin.Iconize;assembly=Plugin.Iconize"
+             x:Class="ISSMobile.OffersPage">
+    <StackLayout>
+        <ListView x:Name="OffersListView"
+            ItemsSource="{Binding Offers}"
+            SelectedItem="{Binding SelectedOffer}">
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" BackgroundColor="LightGray">
+                            <iconize:IconImage HeightRequest="20" WidthRequest="20"
+                                     Icon="{Binding IconName}"
+                                     IconColor="Blue"/>
+                            <Label Text="{Binding OfferNumber}" FontAttributes="Bold" />
+                            <Label Text="{Binding ProductCode}" />
+                            <Label Text="{Binding OfferStatus}" TextColor="{Binding StatusColor}" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <iconize:IconImage HeightRequest="20" WidthRequest="20" Icon="fas-car" IconColor="Blue"/>
+        
+        <Button Text="Buy Policy" Command="{Binding BuyPolicy}" />
+        <Button Text="New Policy" Command="{Binding CreateOffer}" />
+        <!--<Button Text="Refresh" Clicked="RefreshItems" />-->
+    </StackLayout>
+</ContentPage>
