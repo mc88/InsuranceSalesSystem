@@ -13,5 +13,5 @@ variables:
   imageName: 'altkomtest/iss-microservices-poc-pricing-app:$(build.buildId)'
 
 steps:
-- script: docker build -f InsuranceSalesSystem\PricingService.Web\Dockerfile -t $(imageName) .
+- script: docker build -f InsuranceSalesSystem/PricingService.Web/Dockerfile -t $(imageName) .
   displayName: 'docker build'
