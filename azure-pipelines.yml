@@ -13,7 +13,5 @@ variables:
   imageName: 'altkomtest/iss-microservices-poc-pricing-app:$(build.buildId)'
 
 steps:
-- script: cd InsuranceSalesSystem
-  displayName: change root dir
-- script: docker-compose up
+- script: docker-compose -f InsuranceSalesSystem/docker-compose.yml up
   displayName: 'docker build'
