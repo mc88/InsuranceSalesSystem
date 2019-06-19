@@ -15,8 +15,6 @@ variables:
   tag: '$(build.buildId)'
 
 steps:
-- script: cd InsuranceSalesSystem
-  displayName: change workdir
 - script: docker login -u $(dockerId) -p $(dockerPass)
   displayName: 'docker login'
 - script: docker build -f InsuranceSalesSystem/PricingService.Web/Dockerfile -t $(image) .
