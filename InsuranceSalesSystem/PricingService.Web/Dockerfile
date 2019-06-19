@@ -10,7 +10,7 @@ COPY InsuranceSalesSystem/PricingService.Bo/PricingService.Bo.csproj PricingServ
 COPY InsuranceSalesSystem/PricingService.Api/PricingService.Api.csproj PricingService.Api/
 #RUN dotnet restore 
 
-COPY . .
+COPY InsuranceSalesSystem/. .
 WORKDIR /src/PricingService.Web
 RUN dotnet build -c Release -o /app
 #TODO: try to run ef migration here from cmd, now migrations are excuted from code
