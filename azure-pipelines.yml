@@ -10,8 +10,18 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  imageName: 'altkomtest/iss-microservices-poc-pricing-app:$(build.buildId)'
+  app: 'iss-microservices-poc-pricing-app'
+  image: '$(dockerNamespace)/iss-microservices-poc-pricing-app'
+  tag: '$(build.buildId)'
 
 steps:
-- script: docker-compose -f InsuranceSalesSystem/docker-compose.yml up
-  displayName: 'docker build'
+- script: docker login -u $(dockerId) -p $(dockerPass)
+  displayName: 'docker login'
+- script: docker build -t $(image) $(app)
+  displayName: 'docker build $(app)'
+- script: docker tag $(image) $(image):$(tag)
+  displayName: 'docker tag $(image):$(tag)'
+- script: docker push $(image):$(tag)
+  displayName: 'docker push $(image):$(tag)'
+- script: docker push $(image):latest
+  displayName: 'docker push $(image):latest'
