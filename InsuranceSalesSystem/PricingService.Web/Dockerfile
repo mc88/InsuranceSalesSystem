@@ -8,7 +8,10 @@ COPY *.sln ./
 COPY PricingService.Web/PricingService.Web.csproj PricingService.Web/
 COPY PricingService.Bo/PricingService.Bo.csproj PricingService.Bo/
 COPY PricingService.Api/PricingService.Api.csproj PricingService.Api/
-RUN dotnet restore
+RUN dotnet restore PricingService.Web/PricingService.Web.csproj 
+RUN dotnet restore PricingService.Bo/PricingService.Bo.csproj
+RUN dotnet restore PricingService.Api/PricingService.Api.csproj
+
 COPY . .
 WORKDIR /src/PricingService.Web
 RUN dotnet build -c Release -o /app
