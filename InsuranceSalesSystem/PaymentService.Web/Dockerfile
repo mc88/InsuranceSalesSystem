@@ -5,12 +5,12 @@ EXPOSE 80
 FROM microsoft/dotnet:2.1-sdk  AS build
 WORKDIR /src
 COPY InsuranceSalesSystem/*.sln ./
-COPY PaymentService.Web/PaymentService.Web.csproj PaymentService.Web/
-COPY PaymentService.Api/PaymentService.Api.csproj PaymentService.Api/
-COPY PaymentService.Bo/PaymentService.Bo.csproj PaymentService.Bo/
-RUN dotnet restore PaymentService.Web/PaymentService.Web.csproj
-RUN dotnet restore PaymentService.Api/PaymentService.Api.csproj
-RUN dotnet restore PaymentService.Bo/PaymentService.Bo.csproj
+COPY InsuranceSalesSystem/PaymentService.Web/PaymentService.Web.csproj PaymentService.Web/
+COPY InsuranceSalesSystem/PaymentService.Api/PaymentService.Api.csproj PaymentService.Api/
+COPY InsuranceSalesSystem/PaymentService.Bo/PaymentService.Bo.csproj PaymentService.Bo/
+RUN dotnet restore InsuranceSalesSystem/PaymentService.Web/PaymentService.Web.csproj
+RUN dotnet restore InsuranceSalesSystem/PaymentService.Api/PaymentService.Api.csproj
+RUN dotnet restore InsuranceSalesSystem/PaymentService.Bo/PaymentService.Bo.csproj
 COPY . .
 WORKDIR /src/PaymentService.Web
 RUN dotnet build -c Release -o /app

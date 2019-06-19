@@ -5,12 +5,12 @@ EXPOSE 80
 FROM microsoft/dotnet:2.1-sdk  AS build
 WORKDIR /src
 COPY InsuranceSalesSystem/*.sln ./
-COPY PricingService.Web/PricingService.Web.csproj PricingService.Web/
-COPY PricingService.Bo/PricingService.Bo.csproj PricingService.Bo/
-COPY PricingService.Api/PricingService.Api.csproj PricingService.Api/
-RUN dotnet restore PricingService.Web/PricingService.Web.csproj 
-RUN dotnet restore PricingService.Bo/PricingService.Bo.csproj
-RUN dotnet restore PricingService.Api/PricingService.Api.csproj
+COPY InsuranceSalesSystem/PricingService.Web/PricingService.Web.csproj PricingService.Web/
+COPY InsuranceSalesSystem/PricingService.Bo/PricingService.Bo.csproj PricingService.Bo/
+COPY InsuranceSalesSystem/PricingService.Api/PricingService.Api.csproj PricingService.Api/
+RUN dotnet restore InsuranceSalesSystem/PricingService.Web/PricingService.Web.csproj 
+RUN dotnet restore InsuranceSalesSystem/PricingService.Bo/PricingService.Bo.csproj
+RUN dotnet restore InsuranceSalesSystem/PricingService.Api/PricingService.Api.csproj
 
 COPY . .
 WORKDIR /src/PricingService.Web
