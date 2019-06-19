@@ -17,7 +17,7 @@ variables:
 steps:
 - script: docker login -u $(dockerId) -p $(dockerPass)
   displayName: 'docker login'
-- script: docker build -f PricingService.Web\Dockerfile -t $(image)
+- script: docker build -f PricingService.Web\Dockerfile -t $(image) .
   displayName: 'docker build $(app)'
 - script: docker tag $(image) $(image):$(tag)
   displayName: 'docker tag $(image):$(tag)'
