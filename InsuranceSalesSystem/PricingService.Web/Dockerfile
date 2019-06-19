@@ -4,7 +4,7 @@ EXPOSE 80
 
 FROM microsoft/dotnet:2.1-sdk  AS build
 WORKDIR /src
-COPY *.sln ./
+COPY InsuranceSalesSystem/*.sln ./
 COPY PricingService.Web/PricingService.Web.csproj PricingService.Web/
 COPY PricingService.Bo/PricingService.Bo.csproj PricingService.Bo/
 COPY PricingService.Api/PricingService.Api.csproj PricingService.Api/
