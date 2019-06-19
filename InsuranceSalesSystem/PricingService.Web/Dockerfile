@@ -8,9 +8,7 @@ COPY InsuranceSalesSystem/*.sln ./
 COPY InsuranceSalesSystem/PricingService.Web/PricingService.Web.csproj PricingService.Web/
 COPY InsuranceSalesSystem/PricingService.Bo/PricingService.Bo.csproj PricingService.Bo/
 COPY InsuranceSalesSystem/PricingService.Api/PricingService.Api.csproj PricingService.Api/
-RUN dotnet restore InsuranceSalesSystem/PricingService.Web/PricingService.Web.csproj 
-RUN dotnet restore InsuranceSalesSystem/PricingService.Bo/PricingService.Bo.csproj
-RUN dotnet restore InsuranceSalesSystem/PricingService.Api/PricingService.Api.csproj
+RUN dotnet restore 
 
 COPY . .
 WORKDIR /src/PricingService.Web
