@@ -10,18 +10,41 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  app: 'iss-microservices-poc-pricing-app'
-  image: '$(dockerNamespace)/iss-microservices-poc-pricing-app'
+  app-pricing: 'iss-microservices-poc-pricing-app'
+  app-policy: 'iss-microservices-poc-policy-app'
+  app-payment: 'iss-microservices-poc-payment-app'
+  image-pricing: '$(dockerNamespace)/iss-microservices-poc-pricing-app'
+  image-policy: '$(dockerNamespace)/iss-microservices-poc-policy-app'
+  image-payment: '$(dockerNamespace)/iss-microservices-poc-payment-app'
   tag: '$(build.buildId)'
 
 steps:
 - script: docker login -u $(dockerId) -p $(dockerPass)
   displayName: 'docker login'
-- script: docker build -f InsuranceSalesSystem/PricingService.Web/Dockerfile -t $(image) .
-  displayName: 'docker build $(app)'
-- script: docker tag $(image) $(image):$(tag)
-  displayName: 'docker tag $(image):$(tag)'
-- script: docker push $(image):$(tag)
-  displayName: 'docker push $(image):$(tag)'
-- script: docker push $(image):latest
-  displayName: 'docker push $(image):latest'
+
+- script: docker build -f InsuranceSalesSystem/PricingService.Web/Dockerfile -t $(image-pricing) .
+  displayName: 'docker build $(app-pricing)'
+- script: docker tag $(image-pricing) $(image-pricing):$(tag)
+  displayName: 'docker tag $(image-pricing):$(tag)'
+- script: docker push $(image-pricing):$(tag)
+  displayName: 'docker push $(image-pricing):$(tag)'
+- script: docker push $(image-pricing):latest
+  displayName: 'docker push $(image-pricing):latest'
+
+- script: docker build -f InsuranceSalesSystem/PolicyService.Web/Dockerfile -t $(image-policy) .
+  displayName: 'docker build $(app-policy)'
+- script: docker tag $(image-pripolicycing) $(image-policy):$(tag)
+  displayName: 'docker tag $(image-policy):$(tag)'
+- script: docker push $(image-policy):$(tag)
+  displayName: 'docker push $(image-policy):$(tag)'
+- script: docker push $(image-policy):latest
+  displayName: 'docker push $(image-policy):latest'
+
+- script: docker build -f InsuranceSalesSystem/PaymentService.Web/Dockerfile -t $(image-payment) .
+  displayName: 'docker build $(app-payment)'
+- script: docker tag $(image-payment) $(image-payment):$(tag)
+  displayName: 'docker tag $(image-payment):$(tag)'
+- script: docker push $(image-payment):$(tag)
+  displayName: 'docker push $(image-payment):$(tag)'
+- script: docker push $(image-payment):latest
+  displayName: 'docker push $(image-payment):latest'
