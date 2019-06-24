@@ -8,10 +8,8 @@ COPY InsuranceSalesSystem/*.sln ./
 COPY InsuranceSalesSystem/PaymentService.Web/PaymentService.Web.csproj PaymentService.Web/
 COPY InsuranceSalesSystem/PaymentService.Api/PaymentService.Api.csproj PaymentService.Api/
 COPY InsuranceSalesSystem/PaymentService.Bo/PaymentService.Bo.csproj PaymentService.Bo/
-RUN dotnet restore InsuranceSalesSystem/PaymentService.Web/PaymentService.Web.csproj
-RUN dotnet restore InsuranceSalesSystem/PaymentService.Api/PaymentService.Api.csproj
-RUN dotnet restore InsuranceSalesSystem/PaymentService.Bo/PaymentService.Bo.csproj
-COPY . .
+
+COPY InsuranceSalesSystem/. .
 WORKDIR /src/PaymentService.Web
 RUN dotnet build -c Release -o /app
 
