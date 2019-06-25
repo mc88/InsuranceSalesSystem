@@ -26,7 +26,7 @@ namespace PricingService.Bo.Handlers
 
             if (tariff == null)
             {
-                Task.FromResult(null);
+                Task.FromResult<CalculatePriceResponseDto>(null);
             }
 
             var policyPrice = tariff.CalculatePolicyPrice(request);
