@@ -38,7 +38,7 @@ namespace PricingService.Web
             }
 
             app.UseMvc();
-            app.InitializeDatabase();
+            //app.InitializeDatabase();
         }
     }
 }
