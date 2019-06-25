@@ -16,6 +16,12 @@ namespace PricingService.Web.Controllers
             this.mediator = mediator;
         }
 
+        [HttpGet]
+        public async Task<string> Test()
+        {
+            return await Task.FromResult("Test success");
+        }
+
         [HttpPost]
         public async Task<CalculatePriceResponseDto> CalculatePrice([FromBody] CalculatePriceRequestDto request)
         {

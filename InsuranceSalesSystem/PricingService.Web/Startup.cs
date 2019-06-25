@@ -24,8 +24,8 @@ namespace PricingService.Web
         {
             services.AddMvc();
             services.AddMediatR(typeof(CalculatePriceHandler).Assembly);
-            services.AddDbContext<PricingDbContext>(options =>
-                options.UseInMemoryDatabase("PricingDb"));
+            //services.AddDbContext<PricingDbContext>(options =>
+            //    options.UseInMemoryDatabase("PricingDb"));
              //options.UseSqlServer(Configuration.GetConnectionString("PricingDb")));
         }
 
