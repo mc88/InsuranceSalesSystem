@@ -25,7 +25,8 @@ namespace PricingService.Web
             services.AddMvc();
             services.AddMediatR(typeof(CalculatePriceHandler).Assembly);
             services.AddDbContext<PricingDbContext>(options =>
-             options.UseSqlServer(Configuration.GetConnectionString("PricingDb")));
+                options.UseInMemoryDatabase("PricingDb"));
+             //options.UseSqlServer(Configuration.GetConnectionString("PricingDb")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
