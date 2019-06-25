@@ -24,6 +24,11 @@ namespace PricingService.Bo.Handlers
                 .ThenInclude(x => x.CoverPrices)
                 .FirstOrDefault(x => x.Code == request.ProductCode);
 
+            if (tariff == null)
+            {
+                Task.FromResult<CalculatePriceResponseDto>(null);
+            }
+
             var policyPrice = tariff.CalculatePolicyPrice(request);
             
             var response = new CalculatePriceResponseDto

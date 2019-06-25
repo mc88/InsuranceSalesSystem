@@ -4,12 +4,13 @@ EXPOSE 80
 
 FROM microsoft/dotnet:2.1-sdk  AS build
 WORKDIR /src
-COPY *.sln ./
-COPY PricingService.Web/PricingService.Web.csproj PricingService.Web/
-COPY PricingService.Bo/PricingService.Bo.csproj PricingService.Bo/
-COPY PricingService.Api/PricingService.Api.csproj PricingService.Api/
-RUN dotnet restore
-COPY . .
+COPY InsuranceSalesSystem/*.sln ./
+COPY InsuranceSalesSystem/PricingService.Web/PricingService.Web.csproj PricingService.Web/
+COPY InsuranceSalesSystem/PricingService.Bo/PricingService.Bo.csproj PricingService.Bo/
+COPY InsuranceSalesSystem/PricingService.Api/PricingService.Api.csproj PricingService.Api/
+#RUN dotnet restore 
+
+COPY InsuranceSalesSystem/. .
 WORKDIR /src/PricingService.Web
 RUN dotnet build -c Release -o /app
 #TODO: try to run ef migration here from cmd, now migrations are excuted from code
