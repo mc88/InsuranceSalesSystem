@@ -12,6 +12,23 @@ services:
     ports:
       - "15672:15672"
       - "5672:5672"
+  elasticsearch:
+   ports:
+      - "9200:9200"
+   volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+   environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - xpack.monitoring.enabled=true
+      - xpack.watcher.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+
+  kibana:
+   ports:
+      - "5601:5601"
+   environment:
+      - XPACK_MONITORING_ENABLED=true
 
   pricingservice.web:
     environment:

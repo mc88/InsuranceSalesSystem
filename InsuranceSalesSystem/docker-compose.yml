@@ -3,9 +3,25 @@ version: '3.4'
 services:
   sql.data:
     image: microsoft/mssql-server-linux:2017-latest
+    networks:
+      - docker-network
 
   rabbitmq:
     image: rabbitmq:3-management-alpine
+    networks:
+      - docker-network
+
+  elasticsearch:
+   image: docker.elastic.co/elasticsearch/elasticsearch:7.4.2
+   networks:
+      - docker-network
+
+  kibana:
+   image: docker.elastic.co/kibana/kibana:7.4.2
+   depends_on:
+      - elasticsearch
+   networks:
+      - docker-network
 
   pricingservice.web:
     image: pricingservice.web
@@ -14,6 +30,8 @@ services:
       dockerfile: PricingService.Web/Dockerfile
     depends_on:
       - sql.data
+    networks:
+      - docker-network
   
   policyservice.web:
     image: policyservice.web
@@ -24,6 +42,8 @@ services:
       - pricingservice.web
       - sql.data
       - rabbitmq
+    networks:
+      - docker-network
 
   paymentservice.web:
     image: paymentservice.web
@@ -33,4 +53,12 @@ services:
     depends_on:
       - sql.data
       - rabbitmq
+    networks:
+      - docker-network
 
+networks:
+  docker-network:
+    driver: bridge
+
+volumes:
+  elasticsearch-data:
