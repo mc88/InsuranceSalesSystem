@@ -82,7 +82,7 @@ namespace PolicyService.Web
 
             app.ConfigureExceptionHandler();
             app.UseMvc();
-            app.InitializeDatabase();
+            app.InitializeDatabase(Configuration.GetSection("Initialization").GetValue<bool>("InsertSampleData"));
         }
     }
 }
