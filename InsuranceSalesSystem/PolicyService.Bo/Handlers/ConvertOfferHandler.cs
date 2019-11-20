@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using PolicyService.Bo.Infrastructure.Communication.Events;
 using PolicyService.Api.Dto.Events;
 using PolicyService.Bo.Domain;
+using Microsoft.Extensions.Logging;
 
 namespace PolicyService.Bo.Handlers
 {
@@ -18,11 +19,13 @@ namespace PolicyService.Bo.Handlers
     {
         private readonly PolicyDbContext dbContext;
         private readonly IEventPublisher eventPublisher;
+        private readonly ILogger<ConvertOfferHandler> logger;
 
-        public ConvertOfferHandler(PolicyDbContext dbContext, IEventPublisher eventPublisher)
+        public ConvertOfferHandler(PolicyDbContext dbContext, IEventPublisher eventPublisher, ILogger<ConvertOfferHandler> logger)
         {
             this.dbContext = dbContext;
             this.eventPublisher = eventPublisher;
+            this.logger = logger;
         }
 
         public Task<ConvertOfferResponseDto> Handle(ConvertOfferRequestDto request, CancellationToken cancellationToken)
@@ -33,8 +36,11 @@ namespace PolicyService.Bo.Handlers
 
             if (offer == null)
             {
+                logger.LogError($"Offer with number {request?.OfferNumber} not found");
                 throw new OfferNotFoundException(request.OfferNumber);
             }
+
+            logger.LogInformation($"Offer with number {request?.OfferNumber} found");
 
             //TODO: check offer is not expired and status
             //TODO: check if there is no policy created for this offer
@@ -42,6 +48,8 @@ namespace PolicyService.Bo.Handlers
             var policy = offer.ConvertToPolicy();
             dbContext.Policy.Add(policy);
             dbContext.SaveChanges();
+
+            logger.LogInformation($"Offer with number {request?.OfferNumber} converted to policy: {policy.PolicyNumber}");
 
             PublishEvents(policy, offer);
 
@@ -63,6 +71,8 @@ namespace PolicyService.Bo.Handlers
             };
 
             eventPublisher.Publish(policyCreateEvent);
+
+            logger.LogInformation($"PolicyCreatedEvent published, PolicyNumber: {policyCreateEvent.PolicyNumber}, PolicyFrom: {offer.PolicyFrom}, Price: {offer.TotalPrice}");
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.Extensions.Logging;
 using PolicyService.Api.Dto.Pricing.Requests;
 using PolicyService.Api.Dto.Requests;
 using PolicyService.Api.Dto.Responses;
@@ -16,16 +17,20 @@ namespace PolicyService.Bo.Handlers
     {
         private readonly PolicyDbContext dbContext;
         private readonly PricingApiFacade pricingApiFacade;
+        private readonly ILogger<OfferCreationHandler> logger;
 
-        public OfferCreationHandler(PolicyDbContext dbContext, PricingApiFacade pricingApiFacade)
+        public OfferCreationHandler(PolicyDbContext dbContext, PricingApiFacade pricingApiFacade, ILogger<OfferCreationHandler> logger)
         {
             this.dbContext = dbContext;
             this.pricingApiFacade = pricingApiFacade;
+            this.logger = logger;
         }
 
         public Task<CreateOfferResponseDto> Handle(CreateOfferRequestDto request, CancellationToken cancellationToken)
         {
             //TODO: add request validtion 
+
+            logger.LogInformation("Calculating price for offer");
 
             var calculatePriceRequest = new CalculatePriceRequestDto()
             {
@@ -37,11 +42,15 @@ namespace PolicyService.Bo.Handlers
 
             var calculatePriceResponse = pricingApiFacade.CalculatePrice(calculatePriceRequest);
 
+            logger.LogInformation($"Calculated price: {calculatePriceResponse.TotalPrice}");
+
             var offer = new Offer(request, calculatePriceResponse);
 
             dbContext.Offer.Add(offer);
 
             dbContext.SaveChanges();
+
+            logger.LogInformation($"Offer created: {offer.OfferNumber}");
 
             var response = new CreateOfferResponseDto()
             {

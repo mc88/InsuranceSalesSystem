@@ -9,16 +9,19 @@ using PolicyService.Api.Exceptions;
 using PolicyService.Bo.Infrastructure.Database;
 using PolicyService.Bo.Mappers;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace PolicyService.Bo.Handlers
 {
     public class GetOfferDetailsHandler : IRequestHandler<GetOfferDetailsRequestDto, GetOfferDetailsResponseDto>
     {
         private readonly PolicyDbContext dbContext;
+        private readonly ILogger<GetOfferDetailsHandler> logger;
 
-        public GetOfferDetailsHandler(PolicyDbContext dbContext)
+        public GetOfferDetailsHandler(PolicyDbContext dbContext, ILogger<GetOfferDetailsHandler> logger)
         {
             this.dbContext = dbContext;
+            this.logger = logger;
         }
 
         public Task<GetOfferDetailsResponseDto> Handle(GetOfferDetailsRequestDto request, CancellationToken cancellationToken)
@@ -27,8 +30,11 @@ namespace PolicyService.Bo.Handlers
 
             if (offer == null)
             {
+                logger.LogError($"Offer with number {request?.OfferNumber} not found");
                 throw new OfferNotFoundException(request.OfferNumber);
             }
+
+            logger.LogInformation($"Offer with number {request?.OfferNumber} found");
 
             var response = new GetOfferDetailsResponseDto()
             {
