@@ -27,7 +27,7 @@ namespace PricingService.Bo.Handlers
                 .ThenInclude(x => x.CoverPrices)
                 .FirstOrDefault(x => x.Code == request.ProductCode);
 
-            logger.LogInformation($"Calculating price for product '{request?.ProductCode}', tariffId: {tariff?.Id}")
+            logger.LogInformation($"Calculating price for product '{request?.ProductCode}', tariffId: {tariff?.Id}");
 
             var policyPrice = tariff.CalculatePolicyPrice(request);
             
