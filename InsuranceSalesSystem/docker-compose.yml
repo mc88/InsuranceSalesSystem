@@ -22,6 +22,17 @@ services:
       - elasticsearch
    networks:
       - docker-network
+  
+  logstash:
+    container_name: logstash
+    image: docker.elastic.co/logstash/logstash:7.4.2
+    command: logstash -f /usr/share/logstash/logstash/logstash.conf
+    volumes:
+      - ./Logstash/logstash.conf:/usr/share/logstash/logstash/logstash.conf:ro
+    depends_on:
+      - elasticsearch
+    networks:
+      - docker-network
 
   pricingservice.web:
     image: pricingservice.web

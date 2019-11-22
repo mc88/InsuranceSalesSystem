@@ -30,6 +30,14 @@ services:
    environment:
       - XPACK_MONITORING_ENABLED=true
 
+  logstash:
+    ports:
+      - "5044:5044"
+      - "9600:9600"
+    environment:
+      - XPACK_MONITORING_ENABLED=true
+      - "LS_JAVA_OPTS=-Xmx256m -Xms256m"
+
   pricingservice.web:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
