@@ -14,7 +14,7 @@ using PricingService.Web.Infrastracture;
 using RabbitMQ.Client;
 using Serilog;
 using Serilog.Events;
-using Serilog.Sinks.Elasticsearch;
+using Serilog.Sinks.Http;
 using System;
 
 namespace PolicyService.Web
@@ -34,18 +34,9 @@ namespace PolicyService.Web
 
             Configuration = builder.Build();
 
-            var elasticUri = Configuration["ElasticConfiguration:Uri"];
-
             Log.Logger = new LoggerConfiguration()
-                .Enrich.FromLogContext()
-                .MinimumLevel.Debug()
-                .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri(elasticUri))
-                {
-                    AutoRegisterTemplate = true,
-                    MinimumLogEventLevel = LogEventLevel.Verbose,
-                    FailureCallback = e => Console.WriteLine("ES ex: " + e.MessageTemplate)
-                })
-            .CreateLogger();
+                .ReadFrom.Configuration(configuration)
+                .CreateLogger();
         }
 
         public IConfiguration Configuration { get; }

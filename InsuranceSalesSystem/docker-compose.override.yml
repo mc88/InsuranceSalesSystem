@@ -33,6 +33,7 @@ services:
   logstash:
     ports:
       - "5044:5044"
+      - "5045:5045"
       - "9600:9600"
     environment:
       - XPACK_MONITORING_ENABLED=true
