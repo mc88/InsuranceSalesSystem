@@ -34,10 +34,18 @@ services:
     ports:
       - "5044:5044"
       - "5045:5045"
+      - "5050:5050"
       - "9600:9600"
     environment:
       - XPACK_MONITORING_ENABLED=true
       - "LS_JAVA_OPTS=-Xmx256m -Xms256m"
+
+  filebeat:
+    user: root
+    volumes:
+      - ./ELKConfiguration/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/lib/docker/containers/:/var/lib/docker/containers/:ro
 
   pricingservice.web:
     environment:

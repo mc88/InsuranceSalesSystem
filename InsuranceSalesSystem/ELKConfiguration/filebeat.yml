@@ -1,0 +1,20 @@
+filebeat.inputs:    
+  - type: container
+    enabled: true
+    paths:        
+        - /var/lib/docker/containers/*/*.log
+        - /usr/share/dockerlogs/data
+
+processors:
+- decode_json_fields:
+    fields: ["message"]
+    target: "json"
+    overwrite_keys: true
+
+output.logstash:
+  enabled: true
+  hosts: 
+    - "logstash:5050"
+
+logging.json: true
+logging.metrics.enabled: false
